@@ -14,7 +14,6 @@ import {MyFilters} from "../components/Filters";
 
 class homeScreen extends Component {
     componentDidMount() {
-        console.log('1 componentDidMount');
         this.props.getPeople();
     }
 
@@ -36,7 +35,6 @@ class homeScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log('2 mapStateToProps HomeScreen');
     return ({
         isLoading: state.people.isLoading,
         peopleFilter: setFilter(state.people.name,

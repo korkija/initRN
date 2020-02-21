@@ -21,7 +21,7 @@ const initial_data = {
     ageMaxFilter: 1000,
     name: "",
     genderChoose: "both",
-    people: [], //list
+    peopleList: [], //list
     notShow: [],
     page: 1,
     totalForPages: 1,
@@ -41,7 +41,7 @@ export const people = (state = initial_data, action) => {
             return {
                 ...state,
                 isLoading: false,
-                people: action.payLoad,
+                peopleList: action.payLoad,
                 totalForPages: action.payLoad.length,
             };
         }
@@ -66,10 +66,10 @@ export const people = (state = initial_data, action) => {
             };
         }
         case GET_DELETE_PERSON: {
-            state.people[action.payLoad].show = false;
+            state.peopleList[action.payLoad].show = false;
             return {
                 ...state,
-                people: state.people.filter(item => {
+                peopleList: state.peopleList.filter(item => {
                     return item.show === undefined
                 }),
             };

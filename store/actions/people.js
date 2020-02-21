@@ -55,7 +55,7 @@ const notShowPeople = (ID) => ({
 
 export const findForDeletePerson = (ID) => (dispatch, getState) => {
     const {people} = getState();
-    const indexPeople = people.people.findIndex((item) => (item.id === ID));
+    const indexPeople = people.peopleList.findIndex((item) => (item.id === ID));
     dispatch(notShowPeople(ID));
     dispatch(deletePerson(indexPeople));
 };

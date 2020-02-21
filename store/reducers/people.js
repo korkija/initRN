@@ -11,7 +11,6 @@ import {
 } from "../constants";
 
 const initial_data = {
-    //isLoading: false,
     isLoading: true,
     ageMinDefault: 0,
     ageMaxDefault: 100,
@@ -21,7 +20,7 @@ const initial_data = {
     ageMaxFilter: 1000,
     name: "",
     genderChoose: "both",
-    peopleList: [], //list
+    peopleList: [],
     notShow: [],
     page: 1,
     totalForPages: 1,

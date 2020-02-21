@@ -5,7 +5,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import MainStackScreens from "./MainStackScreens";
+import MainStack from "./MainStack";
 import ModalAsk from "../screens/ModalAsk";
 import ModalConfirm from "../screens/ModalConfirm";
 
@@ -15,7 +15,7 @@ const ModalStack = () => (
     <NavigationContainer>
         <RootStack.Navigator mode={'modal'}
                              screenOptions={{headerShown: false, cardStyle: {backgroundColor: 'transparent'}}}>
-            <RootStack.Screen name="MainStackScreens" component={MainStackScreens}/>
+            <RootStack.Screen name="MainStack" component={MainStack}/>
             <RootStack.Screen name="ModalAsk" component={ModalAsk}/>
             <RootStack.Screen name="ModalConfirm" component={ModalConfirm}/>
         </RootStack.Navigator>

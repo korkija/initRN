@@ -180,11 +180,8 @@ const styles = StyleSheet.create({
         width: 140,
         borderColor: 'gray',
         borderWidth: 1,
-        // paddingLeft: 10,
         borderRadius: 5,
     },
-
-
 });
 
 const mapStateToProps = (state) => ({

@@ -9,6 +9,8 @@ class Filters extends React.Component {
         first: '',
         ageMin: this.props.ageMinDefault,
         ageMax: this.props.ageMaxDefault,
+        ageMinFind: this.props.ageMinDefault,
+        ageMaxFind: this.props.ageMaxDefault,
         genderChoose: this.props.gender,
         nameForStart: this.props.name,
         name: this.props.name,
@@ -35,6 +37,8 @@ class Filters extends React.Component {
         this.setState({
             ageMin: value[0],
             ageMax: value[1],
+            ageMinFind:value[0],
+            ageMaxFind:value[1] ,
         }, this.timingAndFilter);
     };
     onChangeMinAge = event => {
@@ -42,8 +46,11 @@ class Filters extends React.Component {
         let value = text;
         this.setState({ageMin: value}, () => {
             value = text ? text : this.props.ageMinDefault;
-            if ((Number(value)) && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
-                this.timingAndFilter();
+            if ((value!=='') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
+                this.setState({ageMinFind: value},this.timingAndFilter);
+            }
+            else{
+                this.setState({ageMinFind: this.props.ageMinDefault},this.timingAndFilter);
             }
         });
     };
@@ -51,9 +58,12 @@ class Filters extends React.Component {
         const {text} = event.nativeEvent;
         let value = text;
         this.setState({ageMax: value}, () => {
-            value = text ? text : this.props.ageMinDefault;
-            if ((Number(value)) && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
-                this.timingAndFilter();
+            value = text ? text : this.props.ageMaxDefault;
+            if ((value!=='') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
+                this.setState({ageMaxFind: value},this.timingAndFilter);
+            }
+            else{
+                this.setState({ageMaxFind: this.props.ageMaxDefault},this.timingAndFilter);
             }
         });
     };
@@ -65,7 +75,7 @@ class Filters extends React.Component {
     };
 
     timingAndFilter = debounce(() => {
-        let {ageMin, ageMax, name, genderChoose} = this.state;
+        let {ageMinFind:ageMin, ageMaxFind:ageMax, name, genderChoose} = this.state;
         ageMin = (ageMin === this.props.ageMinDefault) ? -1 : ageMin;
         ageMax = (ageMax === this.props.ageMaxDefault) ? 1000 : ageMax;
         this.props.setParamFilter({name, ageMin, ageMax, genderChoose});
@@ -83,12 +93,9 @@ class Filters extends React.Component {
     };
 
     render() {
-        const {ageMin, ageMax, nameForStart} = this.state;
-        const minValue = this.props.ageMinFilter === -1 ? this.props.ageMinDefault : ageMin;
-        const maxValue = this.props.ageMaxFilter === 1000 ? this.props.ageMaxDefault : ageMax;
+        const {ageMin:minValue, ageMax:maxValue, nameForStart,genderChoose} = this.state;
         return (
             <View>
-
                 <View style={styles.ageRow}>
                     <Text style={styles.text}>Name:</Text>
                     <TextInput
@@ -123,15 +130,16 @@ class Filters extends React.Component {
                     <Text style={styles.text}>gender:</Text>
                     <View style={styles.dropDown}>
                     <Picker
-                        selectedValue={this.gender[0].value}
+                        selectedValue={genderChoose}
                         onValueChange={this.handleMenuClick}>
                         <Picker.Item label="both" value="both"/>
                         <Picker.Item label="female" value="female"/>
                         <Picker.Item label="male" value="male"/>
                     </Picker>
                     </View>
+                    <Button style={styles.text} onPress={this.reset} title='ОЧИСТИТЬ'/>
                 </View>
-                <Button onPress={this.reset} title='ОЧИСТИТЬ'/>
+
             </View>
         );
     }
@@ -171,12 +179,13 @@ const styles = StyleSheet.create({
         marginTop:10,
         marginBottom:10,
         height: 40,
-        width: 100,
+        width: 140,
         borderColor: 'gray',
         borderWidth: 1,
         // paddingLeft: 10,
         borderRadius: 5,
-    }
+    },
+
 
 });
 

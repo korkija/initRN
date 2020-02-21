@@ -2,6 +2,8 @@ export const setFilter = (name, ageMin, ageMax, genderChoose, people) => {
     const dateNow = (new Date(Date.now())).getFullYear();
     const dateMin = dateNow - (ageMin);
     const dateMax = dateNow - (ageMax);
+    //console.log(', name, ageMin, ageMax, genderChoose');
+    //console.log(genderChoose, name, ageMin, ageMax, genderChoose);
     return people.filter(item => {
         if (item.show === undefined) {
             const itemYears = (new Date(item.dob)).getFullYear();

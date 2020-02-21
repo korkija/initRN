@@ -10,7 +10,7 @@ import {
     SET_PARAM_FILTER, ADD_NOT_SHOW_PERSON,
 } from "../constants";
 
-const INITIAL_DATA = {
+const initial_data = {
     //isLoading: false,
     isLoading: true,
     ageMinDefault: 0,
@@ -21,14 +21,14 @@ const INITIAL_DATA = {
     ageMaxFilter: 1000,
     name: "",
     genderChoose: "both",
-    people: [],
+    people: [], //list
     notShow: [],
     page: 1,
     totalForPages: 1,
     pageSize: 20,
 };
 
-export const people = (state = INITIAL_DATA, action) => {
+export const people = (state = initial_data, action) => {
     switch (action.type) {
         case GET_PEOPLE_PENDING: {
             return {

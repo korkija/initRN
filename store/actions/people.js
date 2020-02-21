@@ -1,13 +1,15 @@
 import axios from "axios";
-import {sortByName} from "../helpers/SortByName";
+import {sortPeopleByName} from "../helpers/sortPeopleByName";
 import {findMinMax} from "../helpers/findMinMax";
 
+import {
+    URL_PEOPLE,
+    URL_PEOPLE_PARAMS,
+} from "../config";
 import {
     GET_PEOPLE_PENDING,
     GET_PEOPLE_REJECTED,
     GET_PEOPLE_RESOLVED,
-    URL_PEOPLE,
-    URL_PEOPLE_PARAMS,
     GET_SIZE_PAGE,
     GET_PAGE,
     GET_AGE_MAX_MIN,
@@ -95,7 +97,7 @@ export const getPeople = (page) => (dispatch, getState) => {
         .then(({data}) => {
             const {people} = getState();
             dispatch(setAgeMaxMin(findMinMax(data.result)));
-            dispatch(getPeopleResolved(sortByName(data.result, people.notShow)));
+            dispatch(getPeopleResolved(sortPeopleByName(data.result, people.notShow)));
             const {name, ageMinFilter: ageMin, ageMaxFilter: ageMax, genderChoose} = people;
             dispatch(setParamFilter({name, ageMin, ageMax, genderChoose}));
             dispatch(getPage(data._meta.currentPage, data._meta.pageCount));

@@ -2,7 +2,7 @@ import React from 'react';
 import {CardPerson} from "./CardPerson";
 import {Text, View, SectionList, StyleSheet} from 'react-native';
 
-export const ListPerson = ({peopleFilterForPage, findForDeletePerson}) => {
+export const ListPeopleContainer = ({peopleFilterForPage, findForDeletePerson}) => {
 
     const ListFirstForChar = peopleFilterForPage.filter((item, index, array) => {
         if ((index === 0) || (String(array[index - 1].first_name)[0] !== String(item.first_name)[0])) {
@@ -45,12 +45,8 @@ export const ListPerson = ({peopleFilterForPage, findForDeletePerson}) => {
 
 const styles = StyleSheet.create({
     listCard: {
-        marginLeft: 20 ,
-        marginRight: 20 ,
+        marginLeft: 20,
+        marginRight: 20,
         marginBottom: 200
     },
 });
-
-export const ListPersonContainer = ListPerson;
-
-

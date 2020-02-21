@@ -1,5 +1,5 @@
-import React  from 'react';
-import { Text,  Button, StyleSheet} from 'react-native';
+import React from 'react';
+import {Text, Button, StyleSheet} from 'react-native';
 import {useNavigation} from "@react-navigation/native";
 import {ListItem} from "native-base";
 
@@ -10,17 +10,17 @@ export const CardPerson = ({firstNamePerson, lastNamePerson, idPerson, agePerson
         navigation.navigate("ModalAsk", {'idPerson': idPerson, 'findForDeletePerson': findForDeletePerson});
     };
     return (
-            <ListItem style={styles.containerCard} key={idPerson}>
-                <Text >
-                    - {genderPerson} - {firstNamePerson} {lastNamePerson},
-                    age - {(new Date(Date.now())).getFullYear() - new Date(agePerson).getFullYear()},
-                </Text>
-                <Button
-                    style={styles.contentContainerCard}
-                    onPress={() => modalMessage(idPerson)}
-                    title='Send'
-                />
-            </ListItem>
+        <ListItem style={styles.containerCard} key={idPerson}>
+            <Text>
+                - {genderPerson} - {firstNamePerson} {lastNamePerson},
+                age - {(new Date(Date.now())).getFullYear() - new Date(agePerson).getFullYear()},
+            </Text>
+            <Button
+                style={styles.contentContainerCard}
+                onPress={() => modalMessage(idPerson)}
+                title='Send'
+            />
+        </ListItem>
     )
 };
 
@@ -34,9 +34,9 @@ const styles = StyleSheet.create({
     contentContainerCard: {
         paddingTop: 30,
         borderRadius: 10,
-        marginLeft:20,
-            height: 40,
-            paddingLeft: 10,
+        marginLeft: 20,
+        height: 40,
+        paddingLeft: 10,
     },
 });
 

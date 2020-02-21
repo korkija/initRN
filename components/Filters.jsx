@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {debounce} from 'lodash';
-import {setParamFilter, resetFilter} from "../src/actions/people";
+import {setParamFilter, resetFilter} from "../store/actions/people";
 import {View, Text, Button, TextInput, Picker, StyleSheet} from 'react-native';
 
 class Filters extends React.Component {
@@ -37,8 +37,8 @@ class Filters extends React.Component {
         this.setState({
             ageMin: value[0],
             ageMax: value[1],
-            ageMinFind:value[0],
-            ageMaxFind:value[1] ,
+            ageMinFind: value[0],
+            ageMaxFind: value[1],
         }, this.timingAndFilter);
     };
     onChangeMinAge = event => {
@@ -46,11 +46,10 @@ class Filters extends React.Component {
         let value = text;
         this.setState({ageMin: value}, () => {
             value = text ? text : this.props.ageMinDefault;
-            if ((value!=='') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
-                this.setState({ageMinFind: value},this.timingAndFilter);
-            }
-            else{
-                this.setState({ageMinFind: this.props.ageMinDefault},this.timingAndFilter);
+            if ((value !== '') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
+                this.setState({ageMinFind: value}, this.timingAndFilter);
+            } else {
+                this.setState({ageMinFind: this.props.ageMinDefault}, this.timingAndFilter);
             }
         });
     };
@@ -59,11 +58,10 @@ class Filters extends React.Component {
         let value = text;
         this.setState({ageMax: value}, () => {
             value = text ? text : this.props.ageMaxDefault;
-            if ((value!=='') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
-                this.setState({ageMaxFind: value},this.timingAndFilter);
-            }
-            else{
-                this.setState({ageMaxFind: this.props.ageMaxDefault},this.timingAndFilter);
+            if ((value !== '') && (Number(value) >= this.props.ageMinDefault) && (Number(value) <= this.props.ageMaxDefault)) {
+                this.setState({ageMaxFind: value}, this.timingAndFilter);
+            } else {
+                this.setState({ageMaxFind: this.props.ageMaxDefault}, this.timingAndFilter);
             }
         });
     };
@@ -75,7 +73,7 @@ class Filters extends React.Component {
     };
 
     timingAndFilter = debounce(() => {
-        let {ageMinFind:ageMin, ageMaxFind:ageMax, name, genderChoose} = this.state;
+        let {ageMinFind: ageMin, ageMaxFind: ageMax, name, genderChoose} = this.state;
         ageMin = (ageMin === this.props.ageMinDefault) ? -1 : ageMin;
         ageMax = (ageMax === this.props.ageMaxDefault) ? 1000 : ageMax;
         this.props.setParamFilter({name, ageMin, ageMax, genderChoose});
@@ -93,7 +91,7 @@ class Filters extends React.Component {
     };
 
     render() {
-        const {ageMin:minValue, ageMax:maxValue, nameForStart,genderChoose} = this.state;
+        const {ageMin: minValue, ageMax: maxValue, nameForStart, genderChoose} = this.state;
         return (
             <View>
                 <View style={styles.ageRow}>
@@ -129,13 +127,13 @@ class Filters extends React.Component {
                 <View style={styles.ageRow}>
                     <Text style={styles.text}>gender:</Text>
                     <View style={styles.dropDown}>
-                    <Picker
-                        selectedValue={genderChoose}
-                        onValueChange={this.handleMenuClick}>
-                        <Picker.Item label="both" value="both"/>
-                        <Picker.Item label="female" value="female"/>
-                        <Picker.Item label="male" value="male"/>
-                    </Picker>
+                        <Picker
+                            selectedValue={genderChoose}
+                            onValueChange={this.handleMenuClick}>
+                            <Picker.Item label="both" value="both"/>
+                            <Picker.Item label="female" value="female"/>
+                            <Picker.Item label="male" value="male"/>
+                        </Picker>
                     </View>
                     <Button style={styles.text} onPress={this.reset} title='ОЧИСТИТЬ'/>
                 </View>
@@ -176,8 +174,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     dropDown: {
-        marginTop:10,
-        marginBottom:10,
+        marginTop: 10,
+        marginBottom: 10,
         height: 40,
         width: 140,
         borderColor: 'gray',
